@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace OnionArcitectureProject.Entities
 {
-    internal class ApplicationUserManager
+    public enum Roles
     {
+        SuperAdmin,
+        Admin,
+        Writer,
+        Basic
     }
 }
