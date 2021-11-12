@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using OnionArcitectureProject.Web.Areas.Identity
+@using OnionArcitectureProject.Web.Areas.Identity.Pages
+@using OnionArcitectureProject.Entities
+@using Microsoft.AspNetCore.Http;
+@using System.Security.Claims
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+    var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+    var userId = claim.Value;
+}

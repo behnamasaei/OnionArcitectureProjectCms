@@ -31,4 +31,12 @@
     <ProjectReference Include="..\OnionArcitectureProject.ViewModels\OnionArcitectureProject.ViewModels.csproj" />
   </ItemGroup>
 
+	
+
+
+	<ItemGroup>
+	  <Folder Include="Areas\Admin\Data\" />
+	  <Folder Include="Areas\Admin\Models\" />
+	</ItemGroup>
+
 </Project>

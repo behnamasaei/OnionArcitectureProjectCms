@@ -65,8 +65,7 @@ using (var scope = scopedFactory.CreateScope())
         Email = "behnamasaei@gmail.com",
         UserName = "admin",
         EmailConfirmed = true,
-        PhoneNumberConfirmed = true,
-        LockoutEnabled = false,
+        PhoneNumberConfirmed = true
     };
 
     if (userManager.Users.All(u => u.Id != admin.Id))
@@ -74,7 +73,7 @@ using (var scope = scopedFactory.CreateScope())
         var user = await userManager.FindByEmailAsync(admin.Email);
         if (user == null)
         {
-            await userManager.CreateAsync(admin, "123456789");
+            await userManager.CreateAsync(admin, "123456");
             await userManager.AddToRoleAsync(admin, Roles.Basic.ToString());
             await userManager.AddToRoleAsync(admin, Roles.Writer.ToString());
             await userManager.AddToRoleAsync(admin, Roles.Admin.ToString());
@@ -102,6 +101,15 @@ app.UseEndpoints(endpoints =>
 
     // add for identity
     endpoints.MapRazorPages();
+
+    // Admin area
+
+    endpoints.MapControllerRoute(
+      name: "Admin",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+
+
 });
 
 app.Run();
