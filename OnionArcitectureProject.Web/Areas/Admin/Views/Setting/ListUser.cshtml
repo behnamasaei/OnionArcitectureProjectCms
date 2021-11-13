@@ -1,0 +1,68 @@
+﻿@model List<OnionArcitectureProject.ViewModels.UserViewModel>
+
+
+<table class="table" dir="ltr">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">User name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col">Command</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+        @foreach (var user in Model)
+        {
+            <tr>
+                <th scope="row">
+                    @i
+                </th>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>
+                    @foreach (var role in user.Roles)
+                    {
+                        <span>@role |</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="RemoveUser" asp-route-id="@user.Id"
+                   data-ajax="true" data-ajax-method="get"
+                   data-ajax-complete="onAjaxComplete"
+                   data-ajax-confirm="suer?"
+                    class="mx-2">
+                        <i class="far fa-trash-alt"></i>
+                    </a> |
+
+                    <a asp-action="EditUser" asp-route-id="@user.Id"
+                    class="mx-2">
+                        <i class="far fa-edit"></i>
+                    </a> |
+
+                    <a asp-action="DetailUser" asp-route-id="@user.Id"
+                    class="mx-2">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                </td>
+            </tr>
+
+            i++;
+
+        }
+    </tbody>
+</table>
+
+@section Scripts
+{
+<script>
+    function onAjaxComplete() {
+        document.location.reload(true);
+    }
+</script>
+<script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+}
