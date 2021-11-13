@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OnionArcitectureProject.Entities\OnionArcitectureProject.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

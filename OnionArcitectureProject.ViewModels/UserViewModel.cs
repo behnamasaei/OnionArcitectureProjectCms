@@ -1,10 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using OnionArcitectureProject.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnionArcitectureProject.ViewModels
 {
-    public class UserViewModel
+
+    public class UserViewModel : ApplicationUser
     {
-        public string Id { get; set; }
+
+        public string? Id { get; set; }
 
         [Required]
         [EmailAddress]
@@ -17,10 +21,13 @@ namespace OnionArcitectureProject.ViewModels
         [Required]
         public string Password { get; set; }
 
-        public string ProfilePicture { get; set; }
 
-        public string Role { get; set; }
+        public string? ProfilePicture { get; set; }
 
-        public IList<string> Roles { get; set; }
+
+        public string? Role { get; set; }
+
+
+        public IList<string>? Roles { get; set; }
     }
 }

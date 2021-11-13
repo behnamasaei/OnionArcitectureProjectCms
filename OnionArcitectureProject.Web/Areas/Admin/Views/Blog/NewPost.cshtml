@@ -1,0 +1,28 @@
+﻿@model BlogPost
+
+<form method="post">
+
+    <p>Title:</p>
+<input type="text" asp-for="Title"></input>
+
+<br />
+<br />
+
+<textarea asp-for="Body" id="editor" class="ckeditor" name="Body" rows="200"></textarea>
+
+<button type="submit">send</button>
+
+</form>
+
+
+
+
+
+<script src="~/lib/ckeditor5/ckeditor.min.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>

@@ -11,6 +11,8 @@ namespace OnionArcitectureProject.DataLayer.Context
             
         }
 
+        DbSet<BlogPost> blogPosts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

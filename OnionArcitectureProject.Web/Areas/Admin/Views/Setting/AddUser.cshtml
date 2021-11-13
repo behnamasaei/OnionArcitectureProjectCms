@@ -1,0 +1,49 @@
+﻿@using OnionArcitectureProject.Entities
+@using Microsoft.EntityFrameworkCore
+@model OnionArcitectureProject.ViewModels.UserViewModel
+
+
+<h1>New user</h1>
+
+<form method="post">
+    <div class="text-danger" style="direction:rtl" asp-validation-summary="All"></div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Email"></label>
+        <input asp-for="@Model.Email" class="form-control" />
+        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.UserName"></label>
+        <input asp-for="@Model.UserName" class="form-control" />
+        <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Password"></label>
+        <input asp-for="@Model.Password" class="form-control" />
+        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="@Model.Role"></label>
+
+        <select asp-for="@Model.Role" aria-selected="True">
+            @foreach (var role in Enum.GetNames(typeof(Roles)))
+            {
+                <option value="@role" selected>@role</option>
+            }
+        </select>
+
+        <span asp-validation-for="@Model.Role" class="text-danger"></span>
+    </div>
+
+    <input type="submit" />
+</form>
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+
+}

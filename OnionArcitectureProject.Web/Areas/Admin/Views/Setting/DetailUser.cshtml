@@ -1,0 +1,51 @@
+﻿@model OnionArcitectureProject.ViewModels.UserViewModel
+
+<h1>User detail</h1>
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="@Model.ProfilePicture" alt="Card image cap">
+  <div class="card-body">
+    <h3 class="card-title">@Model.UserName</h3>
+
+    <span>
+        <p>Email</p>
+    </span>
+    
+    <a class="btn btn-primary" asp-action="ListUser">Back</a>
+  </div>
+</div>
+
+<div class="row">
+    <div clss="col-1">
+        <h4>User name: </h4>
+    </div>
+    <div class="col-1">
+        <h4>@Model.UserName</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div clss="col-1">
+        <h4>پست الکترونیک: </h4>
+    </div>
+    <div class="col-1">
+        <h4>@Model.Email</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div clss="col-1">
+        <h4>نقش کاربری: </h4>
+    </div>
+    <div class="col-1">
+        @foreach (var role in Model.Roles)
+        {
+            <h4>@role.ToString()</h4>
+        }
+
+    </div>
+
+
+    <a class="btn btn-primary" asp-action="ListUser">برگشت</a>
+
+</div>
