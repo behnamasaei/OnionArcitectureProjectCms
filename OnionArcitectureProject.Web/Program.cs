@@ -31,6 +31,9 @@ builder.Services.AddCustomService();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddMvc(options=>
+    options.EnableEndpointRouting=false);
+builder.Services.AddRazorPages();
 
 
 var app = builder.Build();
@@ -63,7 +66,7 @@ using (var scope = scopedFactory.CreateScope())
     var admin = new ApplicationUser
     {
         Email = "behnamasaei@gmail.com",
-        UserName = "admin",
+        UserName = "Admin",
         EmailConfirmed = true,
         PhoneNumberConfirmed = true
     };
@@ -73,6 +76,8 @@ using (var scope = scopedFactory.CreateScope())
         var user = await userManager.FindByEmailAsync(admin.Email);
         if (user == null)
         {
+            await userManager.SetUserNameAsync(admin, admin.UserName);
+            await userManager.SetEmailAsync(admin, admin.Email);
             await userManager.CreateAsync(admin, "123456");
             await userManager.AddToRoleAsync(admin, Roles.Basic.ToString());
             await userManager.AddToRoleAsync(admin, Roles.Writer.ToString());
@@ -93,23 +98,24 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+
 app.UseEndpoints(endpoints =>
 {
+    // Admin area
+    // put before 'default' to fix asp-area routing
+    endpoints.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}");
+
+
     endpoints.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+    
     // add for identity
     endpoints.MapRazorPages();
-
-    // Admin area
-
-    endpoints.MapControllerRoute(
-      name: "Admin",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
-
-
 });
 
 app.Run();
